@@ -1,0 +1,38 @@
+/* space grotesk and geist */
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap");
+@import "tailwindcss";
+
+/* akshat sans */
+@font-face {
+  font-family: "Akshat Sans";
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/AkshatSans.ttf), format("ttf");
+}
+
+@theme {
+  --font-space-grotesk: "Space Grotesk", sans-serif;
+  --font-geist: "Geist", sans-serif;
+  --font-akshat-sans: "Akshat Sans", serif;
+
+  /* overrides */
+  --font-sans: var(--font-geist);
+}
+
+@layer base {
+  h1 {
+    @apply font-akshat-sans text-5xl tracking-tight text-slate-200 sm:text-7xl;
+  }
+
+  h2 {
+    @apply font-space-grotesk mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl;
+  }
+
+  h3 {
+    @apply font-space-grotesk font-medium leading-snug text-slate-200;
+  }
+
+  p {
+    @apply font-geist;
+  }
+}
