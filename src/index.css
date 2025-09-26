@@ -21,15 +21,15 @@
 
 @layer base {
   h1 {
-    @apply font-akshat-sans text-6xl;
+    @apply font-akshat-sans text-5xl tracking-tight text-slate-200 sm:text-7xl;
   }
 
   h2 {
-    @apply font-space-grotesk text-2xl;
+    @apply font-space-grotesk mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl;
   }
 
   h3 {
-    @apply font-space-grotesk text-xl;
+    @apply font-space-grotesk font-medium leading-snug text-slate-200;
   }
 
   p {
