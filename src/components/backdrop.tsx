@@ -16,7 +16,7 @@ export function Backdrop() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-30 transition duration-1000 lg:absolute"
+      className="pointer-events-none fixed inset-0 z-[-1] transition duration-1000 lg:absolute"
       style={{
         background: `radial-gradient(600px at ${position[0]}px ${position[1]}px, rgba(29, 78, 216, 0.15), transparent 80%)`,
       }}
