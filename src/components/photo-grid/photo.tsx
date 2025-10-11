@@ -1,11 +1,22 @@
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import type { Photo as PhotoType } from "../../assets/photos";
+
 interface PhotoProps {
-  type: "portrait" | "landscape";
+  photo: PhotoType;
 }
 
-function Photo({ type }: PhotoProps) {
-  const ratio = type === "landscape" ? "720/1080" : "1080/720";
-
-  return <img src={`https://picsum.photos/${ratio}`} />;
+function Photo({ photo }: PhotoProps) {
+  return (
+    <Link to={`/photos/${photo.slug}`} className="block">
+      <motion.img
+        src={photo.src}
+        alt={photo.title}
+        layoutId={`photo-${photo.id}`}
+        className="cursor-pointer transition-opacity hover:opacity-90"
+      />
+    </Link>
+  );
 }
 
 export default Photo;
