@@ -1,0 +1,110 @@
+[
+  {
+    "filename": "IMG_0911.webp",
+    "title": "Overlooking Egret",
+    "slug": "overlooking-egret",
+    "description": "",
+    "date": "2020-10-01",
+    "location": "Baylands, Palo Alto",
+    "is_landscape": true
+  },
+  {
+    "filename": "IMG_0914.webp",
+    "title": "Egret Taking Off",
+    "slug": "egret-taking-off",
+    "description": "",
+    "date": "2020-10-01",
+    "location": "Baylands, Palo Alto",
+    "is_landscape": true
+  },
+  {
+    "filename": "IMG_0918.webp",
+    "title": "Overlook Near Golden Gate Bridge",
+    "slug": "overlook-near-golden-gate-bridge",
+    "description": "",
+    "date": "2024-10-01",
+    "location": "San Fransisco",
+    "is_landscape": false
+  },
+  {
+    "filename": "IMG_2332-01.webp",
+    "title": "Fireworks On the 4th of July",
+    "slug": "fireworks-on-the-4th-of-july",
+    "description": "",
+    "date": "2021-07-01",
+    "location": "Santa Clara",
+    "is_landscape": false
+  },
+  {
+    "filename": "IMG_3729.webp",
+    "title": "Wild Bison on a Snowy Morning",
+    "slug": "wild-bison-on-a-snowy-morning",
+    "description": "",
+    "date": "2025-09-01",
+    "location": "Yellowstone",
+    "is_landscape": true
+  },
+  {
+    "filename": "IMG_3791.webp",
+    "title": "Morning Mist on the Caldera",
+    "slug": "morning-mist-on-the-caldera",
+    "description": "",
+    "date": "2025-09-01",
+    "location": "Yellowstone",
+    "is_landscape": true
+  },
+  {
+    "filename": "IMG_4007.webp",
+    "title": "Jam the Bear strolling through a meadow",
+    "slug": "jam-the-bear-strolling-through-a-meadow",
+    "description": "",
+    "date": "2025-09-01",
+    "location": "Yellowstone",
+    "is_landscape": true
+  },
+  {
+    "filename": "IMG_4706.webp",
+    "title": "Wild Coyote on the hunt",
+    "slug": "wild-coyote-on-the-hunt",
+    "description": "",
+    "date": "2025-09-01",
+    "location": "Yellowstone",
+    "is_landscape": true
+  },
+  {
+    "filename": "PXL_20221225_144238372.MP_Original.webp",
+    "title": "Morning at Joshua Tree",
+    "slug": "morning-at-joshua-tree",
+    "description": "",
+    "date": "2022-12-01",
+    "location": "Joshua Tree",
+    "is_landscape": true
+  },
+  {
+    "filename": "PXL_20221225_144827531.PORTRAIT.webp",
+    "title": "Cacti against the Mojave Morning",
+    "slug": "cacti-against-the-mojave-morning",
+    "description": "",
+    "date": "2022-12-01",
+    "location": "Joshua Tree",
+    "is_landscape": true
+  },
+  {
+    "filename": "PXL_20240818_234826910.LONG_EXPOSURE-01.COVER.webp",
+    "title": "Meadow at Rainier",
+    "slug": "meadow-at-rainier",
+    "description": "",
+    "date": "2024-08-01",
+    "location": "Mount Rainier",
+    "is_landscape": false
+  },
+  {
+    "filename": "PXL_20240820_023346232.webp",
+    "title": "The Space Needle and Rainier",
+    "slug": "the-space-needle-and-rainier",
+    "description": "",
+    "date": "2024-08-01",
+    "location": "Seattle",
+    "is_landscape": true
+  }
+]

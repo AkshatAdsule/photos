@@ -2,12 +2,18 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { getPhotoBySlug } from "../../assets/photos";
+import { scrollToTop } from "../../utils/scrollRestoration";
 import "./photo-detail.css";
 
 function PhotoDetail() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const photo = slug ? getPhotoBySlug(slug) : undefined;
+
+  useEffect(() => {
+    // Scroll to top when viewing photo detail
+    scrollToTop();
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -40,8 +46,6 @@ function PhotoDetail() {
     year: "numeric",
     month: "long",
     day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
   });
 
   return (
@@ -81,7 +85,8 @@ function PhotoDetail() {
           <div className="sidebar-content">
             <h1>{photo.title}</h1>
             <p className="photo-date">{formattedDate}</p>
-            <p className="photo-description">{photo.description}</p>
+            {photo.location && <p className="photo-location">{photo.location}</p>}
+            {photo.description && <p className="photo-description">{photo.description}</p>}
           </div>
         </aside>
       </div>
