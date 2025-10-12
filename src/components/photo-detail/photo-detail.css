@@ -1,0 +1,134 @@
+.photo-detail-container {
+  position: fixed;
+  inset: 0;
+  background: #0f172a;
+  z-index: 50;
+  overflow: hidden;
+}
+
+.close-button {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 60;
+  padding: 0.75rem;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.close-button:hover {
+  background: rgba(15, 23, 42, 0.95);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.photo-detail-content {
+  display: flex;
+  height: 100vh;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.photo-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.detail-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+.photo-sidebar {
+  width: 24rem;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-content h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.photo-date {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.photo-description {
+  color: #cbd5e1;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 1.5rem;
+}
+
+.not-found h1 {
+  font-size: 2rem;
+  color: #e2e8f0;
+}
+
+.back-button {
+  padding: 0.75rem 1.5rem;
+  background: rgba(99, 102, 241, 0.8);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.back-button:hover {
+  background: rgba(99, 102, 241, 1);
+  transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .photo-detail-content {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .photo-container {
+    flex: 1;
+    max-height: 60vh;
+  }
+
+  .photo-sidebar {
+    width: 100%;
+    max-height: 35vh;
+  }
+
+  .close-button {
+    top: 1rem;
+    left: 1rem;
+  }
+}
+
