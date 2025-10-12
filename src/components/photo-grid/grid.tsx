@@ -1,8 +1,15 @@
+import { useEffect } from "react";
 import "./grid.css";
 import Photo from "./photo";
 import { photos } from "../../assets/photos";
+import { restoreScrollPosition } from "../../utils/scrollRestoration";
 
 function Grid() {
+  useEffect(() => {
+    // Restore scroll position when returning to grid
+    restoreScrollPosition();
+  }, []);
+
   // Organize photos into columns based on their type
   const columns = [
     photos.filter((_, i) => i % 3 === 0),
