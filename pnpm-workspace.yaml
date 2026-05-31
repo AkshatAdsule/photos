@@ -6,4 +6,5 @@ allowBuilds:
   workerd: true
 onlyBuiltDependencies:
   - esbuild
+  - sharp
   - workerd
