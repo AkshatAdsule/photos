@@ -5,42 +5,49 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 <script>
   import { Fancybox } from "@fancyapps/ui/dist/fancybox/";
 
-  Fancybox.bind("[data-fancybox]", {
-    theme: "auto",
-    mainStyle: {
-      "--f-button-width": "44px",
-      "--f-button-height": "44px",
-      "--f-button-border-radius": "50%",
-      "--f-toolbar-padding": "16px"
-    },
-    Carousel: {
-      Arrows: false,
-      Toolbar: {
-        display: {
-          left: [],
-          middle: [],
-          right: ["close"]
+  const setupFancybox = () => {
+    Fancybox.unbind("[data-fancybox]");
+    Fancybox.bind("[data-fancybox]", {
+      Hash: false,
+      theme: "auto",
+      mainStyle: {
+        "--f-button-width": "44px",
+        "--f-button-height": "44px",
+        "--f-button-border-radius": "50%",
+        "--f-toolbar-padding": "16px"
+      },
+      Carousel: {
+        Arrows: false,
+        Toolbar: {
+          display: {
+            left: [],
+            middle: [],
+            right: ["close"]
+          }
         }
       },
-      transition: "slide"
-    }
-  });
+    });
 
-  const requestedPhoto = new URLSearchParams(window.location.search).get("photo");
+    const requestedPhoto = new URLSearchParams(window.location.search).get("photo");
 
-  if (requestedPhoto) {
-    const openRequestedPhoto = () => {
+    if (requestedPhoto) {
       const requestedLink = Array.from(
         document.querySelectorAll<HTMLElement>("[data-fancybox][data-photo-src]")
       ).find((link) => link instanceof HTMLElement && link.dataset.photoSrc === requestedPhoto);
 
-      requestedLink?.click();
-    };
+      if (requestedLink) {
+        requestedLink.click();
 
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", openRequestedPhoto, { once: true });
-    } else {
-      openRequestedPhoto();
+        const cleanUrl = new URL(window.location.href);
+        cleanUrl.searchParams.delete("photo");
+        window.history.replaceState(
+          window.history.state,
+          "",
+          `${cleanUrl.pathname}${cleanUrl.search}${cleanUrl.hash}`
+        );
+      }
     }
-  }
+  };
+
+  document.addEventListener("astro:page-load", setupFancybox);
 </script>
