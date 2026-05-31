@@ -66,7 +66,7 @@ const {
     flex-grow: calc(var(--width) * (100000 / var(--height)));
     flex-basis: calc(var(--min-height) * (var(--width) / var(--height)));
     aspect-ratio: var(--width) / var(--height);
-    background: light-dark(var(--surface), var(--surface-dark));
+    background: var(--surface);
     overflow: hidden;
     opacity: 1;
     transition:
@@ -88,7 +88,7 @@ const {
   }
 
   .photo-grid a:focus-visible {
-    outline: 3px solid light-dark(var(--outline), var(--text-dark));
+    outline: 3px solid var(--outline);
     outline-offset: 2px;
     transform: scale(1.03);
     z-index: 1;

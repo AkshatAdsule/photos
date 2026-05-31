@@ -51,7 +51,7 @@ const { album } = Astro.props;
 
   .album-preview__header p {
     margin: 8px 0 0;
-    color: light-dark(var(--muted), var(--muted-dark));
+    color: var(--muted);
     font-size: clamp(0.88rem, 1vw, 1rem);
     line-height: 1.4;
   }
@@ -62,7 +62,7 @@ const { album } = Astro.props;
     min-height: 32px;
     border: 1px solid currentColor;
     padding: 0 10px;
-    color: light-dark(var(--text), var(--text-dark));
+    color: var(--text);
     font-size: 0.78rem;
     font-weight: 800;
     letter-spacing: 0.02em;
@@ -75,8 +75,8 @@ const { album } = Astro.props;
   }
 
   .album-preview__link:hover {
-    background-color: light-dark(var(--text), var(--text-dark));
-    color: light-dark(var(--bg), var(--bg-dark));
+    background-color: var(--text);
+    color: var(--bg);
   }
 
   .album-preview::after {
@@ -90,7 +90,7 @@ const { album } = Astro.props;
     background: linear-gradient(
       to bottom,
       transparent,
-      light-dark(var(--bg), var(--bg-dark))
+      var(--bg)
     );
   }
 
