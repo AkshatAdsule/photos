@@ -3,40 +3,52 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 ---
 
 <script>
-  import { Fancybox } from "@fancyapps/ui/dist/fancybox/";
+  import { Fancybox, type FancyboxOptions } from "@fancyapps/ui/dist/fancybox/";
+
+  const fancyboxOptions: Partial<FancyboxOptions> = {
+    Hash: false,
+    theme: "auto",
+    mainStyle: {
+      "--f-button-width": "44px",
+      "--f-button-height": "44px",
+      "--f-button-border-radius": "50%",
+      "--f-toolbar-padding": "16px"
+    },
+    Carousel: {
+      Arrows: false,
+      Thumbs: {
+        type: "classic"
+      },
+      Toolbar: {
+        display: {
+          left: [],
+          middle: [],
+          right: ["close"]
+        }
+      }
+    },
+  };
 
   const setupFancybox = () => {
     Fancybox.unbind("[data-fancybox]");
-    Fancybox.bind("[data-fancybox]", {
-      Hash: false,
-      theme: "auto",
-      mainStyle: {
-        "--f-button-width": "44px",
-        "--f-button-height": "44px",
-        "--f-button-border-radius": "50%",
-        "--f-toolbar-padding": "16px"
-      },
-      Carousel: {
-        Arrows: false,
-        Toolbar: {
-          display: {
-            left: [],
-            middle: [],
-            right: ["close"]
-          }
-        }
-      },
-    });
+    Fancybox.bind("[data-fancybox]", fancyboxOptions);
 
     const requestedPhoto = new URLSearchParams(window.location.search).get("photo");
 
     if (requestedPhoto) {
-      const requestedLink = Array.from(
+      const galleryLinks = Array.from(
         document.querySelectorAll<HTMLElement>("[data-fancybox][data-photo-src]")
-      ).find((link) => link instanceof HTMLElement && link.dataset.photoSrc === requestedPhoto);
+      );
+      const requestedIndex = galleryLinks.findIndex(
+        (link) => link.dataset.photoSrc === requestedPhoto
+      );
 
-      if (requestedLink) {
-        requestedLink.click();
+      if (requestedIndex >= 0) {
+        Fancybox.fromNodes(galleryLinks, {
+          ...fancyboxOptions,
+          startIndex: requestedIndex,
+          triggerEl: galleryLinks[requestedIndex],
+        });
 
         const cleanUrl = new URL(window.location.href);
         cleanUrl.searchParams.delete("photo");
@@ -49,5 +61,6 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
     }
   };
 
+  setupFancybox();
   document.addEventListener("astro:page-load", setupFancybox);
 </script>
