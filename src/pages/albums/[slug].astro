@@ -32,6 +32,12 @@ if (!album) {
 
 <style>
   .album-page {
-    padding: clamp(12px, 2vw, 28px) 0 clamp(32px, 5vw, 72px);
+    padding: 12px 0 32px;
+  }
+
+  @media (min-width: 700px) {
+    .album-page {
+      padding: 28px 0 72px;
+    }
   }
 </style>

@@ -21,10 +21,26 @@ import { albums } from "../lib/albums";
 
 <style>
   .album-index {
-    padding: clamp(12px, 2vw, 28px) 0 clamp(32px, 5vw, 72px);
+    padding: 12px 0 32px;
   }
 
   .album-index :global(.album-preview + .album-preview) {
-    margin-top: clamp(28px, 4.5vw, 64px);
+    margin-top: 28px;
+  }
+
+  @media (min-width: 700px) {
+    .album-index {
+      padding: 28px 0 72px;
+    }
+
+    .album-index :global(.album-preview + .album-preview) {
+      margin-top: 54px;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .album-index :global(.album-preview + .album-preview) {
+      margin-top: 64px;
+    }
   }
 </style>

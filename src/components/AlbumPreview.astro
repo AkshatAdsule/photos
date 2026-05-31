@@ -33,8 +33,9 @@ const { album } = Astro.props;
   }
 
   .album-preview__header {
+    font-size: 3rem;
     width: var(--page-width);
-    margin: 0 auto clamp(5px, 0.5vw, 10px);
+    margin: 0 auto 5px;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -43,7 +44,7 @@ const { album } = Astro.props;
 
   .album-preview__header h2 {
     margin: 0;
-    font-size: clamp(1.55rem, 3.8vw, 3.5rem);
+    font-size: 3.5rem;
     font-weight: 800;
     line-height: 0.95;
     letter-spacing: 0;
@@ -52,7 +53,7 @@ const { album } = Astro.props;
   .album-preview__header p {
     margin: 8px 0 0;
     color: var(--muted);
-    font-size: clamp(0.88rem, 1vw, 1rem);
+    font-size: 0.88rem;
     line-height: 1.4;
   }
 
@@ -84,7 +85,7 @@ const { album } = Astro.props;
     right: 0;
     bottom: 0;
     left: 0;
-    height: min(120px, 18vw);
+    height: 64px;
     content: "";
     pointer-events: none;
     background: linear-gradient(
@@ -101,6 +102,20 @@ const { album } = Astro.props;
 
     .album-preview__link {
       justify-self: start;
+    }
+  }
+
+  @media (min-width: 700px) {
+    .album-preview__header {
+      margin-bottom: 10px;
+    }
+
+    .album-preview__header p {
+      font-size: 1rem;
+    }
+
+    .album-preview::after {
+      height: 120px;
     }
   }
 </style>
