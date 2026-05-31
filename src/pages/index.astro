@@ -11,8 +11,8 @@ import { albums } from "../lib/albums";
 >
   <main class="album-index">
     {
-      albums.map((album) => (
-        <AlbumPreview album={album} />
+      albums.map((album, index) => (
+        <AlbumPreview album={album} eagerCount={index === 0 ? 6 : 0} />
       ))
     }
   </main>

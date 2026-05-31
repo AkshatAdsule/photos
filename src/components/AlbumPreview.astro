@@ -4,9 +4,10 @@ import PhotoGrid from "./PhotoGrid.astro";
 
 interface Props {
   album: Album;
+  eagerCount?: number;
 }
 
-const { album } = Astro.props;
+const { album, eagerCount = 0 } = Astro.props;
 ---
 
 <article class="album-preview">
@@ -22,7 +23,7 @@ const { album } = Astro.props;
   <PhotoGrid
     photos={album.photos}
     galleryId={`preview-${album.slug}`}
-    eagerCount={9}
+    eagerCount={eagerCount}
     preview
   />
 </article>
