@@ -39,6 +39,7 @@ const imageQuality = preview ? 90 : undefined;
             : photo.image.src
         }
         target={albumHref ? undefined : "_blank"}
+        data-astro-prefetch="false"
         data-fancybox={albumHref ? undefined : galleryId}
         data-caption={photo.title ?? photo.alt}
         data-photo-src={photo.src}

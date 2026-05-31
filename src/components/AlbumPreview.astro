@@ -16,7 +16,7 @@ const { album, eagerCount = 0 } = Astro.props;
       <h2>{album.title}</h2>
       <p>{album.description}</p>
     </div>
-    <a href={`/albums/${album.slug}/`} class="album-preview__link">
+    <a href={`/albums/${album.slug}/`} class="album-preview__link" data-album-prefetch>
       View album
     </a>
   </header>
@@ -28,6 +28,40 @@ const { album, eagerCount = 0 } = Astro.props;
     preview
   />
 </article>
+
+<script>
+  const prefetchedAlbums = new Set<string>();
+
+  const prefetchAlbum = (link: HTMLAnchorElement) => {
+    const href = link.href.replace(/#.*/, "");
+
+    if (prefetchedAlbums.has(href)) {
+      return;
+    }
+
+    prefetchedAlbums.add(href);
+
+    const prefetchLink = document.createElement("link");
+    prefetchLink.rel = "prefetch";
+    prefetchLink.href = href;
+    document.head.append(prefetchLink);
+  };
+
+  const setupAlbumPrefetch = () => {
+    document.querySelectorAll<HTMLAnchorElement>("a[data-album-prefetch]").forEach((link) => {
+      if (link.dataset.albumPrefetchReady) {
+        return;
+      }
+
+      link.dataset.albumPrefetchReady = "true";
+      link.addEventListener("mouseenter", () => prefetchAlbum(link), { passive: true });
+      link.addEventListener("focus", () => prefetchAlbum(link), { passive: true });
+    });
+  };
+
+  setupAlbumPrefetch();
+  document.addEventListener("astro:page-load", setupAlbumPrefetch);
+</script>
 
 <style>
   .album-preview {
