@@ -13,8 +13,5 @@
     "node_modules",
     "dist",
     "public"
-  ],
-  "include": [
-    "./worker-configuration.d.ts"
   ]
 }
