@@ -24,6 +24,7 @@ const { album, eagerCount = 0 } = Astro.props;
     photos={album.photos}
     galleryId={`preview-${album.slug}`}
     eagerCount={eagerCount}
+    albumHref={`/albums/${album.slug}/`}
     preview
   />
 </article>

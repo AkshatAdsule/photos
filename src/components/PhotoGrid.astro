@@ -7,6 +7,7 @@ interface Props {
   galleryId: string;
   eagerCount?: number;
   preview?: boolean;
+  albumHref?: string;
   class?: string;
 }
 
@@ -15,6 +16,7 @@ const {
   galleryId,
   eagerCount = 1,
   preview = false,
+  albumHref,
   class: className = ""
 } = Astro.props;
 ---
@@ -27,10 +29,15 @@ const {
     photos.map((photo, index) => (
       <a
         style={`--width: ${photo.image.width}; --height: ${photo.image.height};`}
-        href={photo.image.src}
-        target="_blank"
-        data-fancybox={galleryId}
+        href={
+          albumHref
+            ? `${albumHref}?photo=${encodeURIComponent(photo.src)}`
+            : photo.image.src
+        }
+        target={albumHref ? undefined : "_blank"}
+        data-fancybox={albumHref ? undefined : galleryId}
         data-caption={photo.title ?? photo.alt}
+        data-photo-src={photo.src}
         aria-label={photo.alt}
       >
         <Image

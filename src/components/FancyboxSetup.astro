@@ -25,4 +25,22 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
       transition: "slide"
     }
   });
+
+  const requestedPhoto = new URLSearchParams(window.location.search).get("photo");
+
+  if (requestedPhoto) {
+    const openRequestedPhoto = () => {
+      const requestedLink = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-fancybox][data-photo-src]")
+      ).find((link) => link instanceof HTMLElement && link.dataset.photoSrc === requestedPhoto);
+
+      requestedLink?.click();
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", openRequestedPhoto, { once: true });
+    } else {
+      openRequestedPhoto();
+    }
+  }
 </script>
