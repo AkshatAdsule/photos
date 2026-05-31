@@ -2,10 +2,19 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": [
+        "./src/*"
+      ]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
   },
-  "exclude": ["node_modules", "dist", "public"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "public"
+  ],
+  "include": [
+    "./worker-configuration.d.ts"
+  ]
 }
