@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from "@astrojs/sitemap";
 
 
@@ -7,8 +7,16 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://photos.aksads.tech",
 
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: "Manrope",
+      cssVariable: "--font-manrope"
+    }
+  ],
+
   devToolbar: {
-    enabled: false,
+    enabled: true,
   },
 
   integrations: [sitemap()],
