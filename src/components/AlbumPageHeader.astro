@@ -1,0 +1,63 @@
+---
+import type { Album } from "../lib/albums";
+
+interface Props {
+  album: Album;
+}
+
+const { album } = Astro.props;
+---
+
+<header class="album-page-header">
+  <a href="/" class="album-page-header__back-link">All albums</a>
+  <h1>{album.title}</h1>
+  <p>{album.description}</p>
+</header>
+
+<style>
+  .album-page-header {
+    width: var(--page-width);
+    margin: 0 auto clamp(10px, 1.4vw, 18px);
+    padding-bottom: 10px;
+    border-bottom: 2px solid light-dark(var(--line), var(--line-dark));
+  }
+
+  .album-page-header__back-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    margin-bottom: clamp(18px, 3vw, 40px);
+    border: 2px solid currentColor;
+    padding: 0 10px;
+    color: light-dark(var(--text), var(--text-dark));
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      background-color 0.12s ease,
+      color 0.16s ease;
+  }
+
+  .album-page-header__back-link:hover {
+    background-color: light-dark(var(--text), var(--text-dark));
+    color: light-dark(var(--bg), var(--bg-dark));
+  }
+
+  .album-page-header h1 {
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 5.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: 0;
+  }
+
+  .album-page-header p {
+    max-width: 58ch;
+    margin: 8px 0 0;
+    color: light-dark(var(--muted), var(--muted-dark));
+    font-size: clamp(0.88rem, 1vw, 1rem);
+    line-height: 1.4;
+  }
+</style>

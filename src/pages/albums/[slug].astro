@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AlbumPageHeader from "../../components/AlbumPageHeader.astro";
+import FancyboxSetup from "../../components/FancyboxSetup.astro";
+import PhotoGrid from "../../components/PhotoGrid.astro";
+import { albums, getAlbum } from "../../lib/albums";
+
+export function getStaticPaths() {
+  return albums.map((album) => ({
+    params: { slug: album.slug }
+  }));
+}
+
+const album = getAlbum(Astro.params.slug ?? "");
+
+if (!album) {
+  return Astro.redirect("/");
+}
+---
+
+<BaseLayout
+  title={`${album.title} Photos`}
+  description={album.description}
+  image={{ src: album.photos[0]?.image.src ?? "", alt: album.photos[0]?.alt ?? "" }}
+>
+  <main class="album-page">
+    <AlbumPageHeader album={album} />
+    <PhotoGrid photos={album.photos} galleryId={`album-${album.slug}`} />
+  </main>
+  <FancyboxSetup />
+</BaseLayout>
+
+<style>
+  .album-page {
+    padding: clamp(12px, 2vw, 28px) 0 clamp(32px, 5vw, 72px);
+  }
+</style>

@@ -1,0 +1,116 @@
+---
+import { Image } from "astro:assets";
+import type { AlbumPhoto } from "../lib/albums";
+
+interface Props {
+  photos: AlbumPhoto[];
+  galleryId: string;
+  eagerCount?: number;
+  preview?: boolean;
+  class?: string;
+}
+
+const {
+  photos,
+  galleryId,
+  eagerCount = 12,
+  preview = false,
+  class: className = ""
+} = Astro.props;
+---
+
+<section
+  class:list={["photo-grid", { "photo-grid--preview": preview }, className]}
+  data-gallery-id={galleryId}
+>
+  {
+    photos.map((photo, index) => (
+      <a
+        style={`--width: ${photo.image.width}; --height: ${photo.image.height};`}
+        href={photo.image.src}
+        target="_blank"
+        data-fancybox={galleryId}
+        data-caption={photo.title ?? photo.alt}
+        aria-label={photo.alt}
+      >
+        <Image
+          format="webp"
+          src={photo.image}
+          alt={photo.alt}
+          height={400}
+          loading={index < eagerCount ? "eager" : "lazy"}
+        />
+      </a>
+    ))
+  }
+</section>
+
+<style>
+  .photo-grid {
+    --padding: max(1.5vw, 10px);
+    --space: max(1.5vw, 10px);
+    --min-height: clamp(200px, 20vw, 400px);
+
+    padding: 4px var(--padding);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space);
+  }
+
+  .photo-grid--preview {
+    max-height: calc((var(--min-height) * 1.5) + (var(--space) * 2) + (var(--padding) * 2));
+    overflow: hidden;
+  }
+
+  .photo-grid a {
+    flex-grow: calc(var(--width) * (100000 / var(--height)));
+    flex-basis: calc(var(--min-height) * (var(--width) / var(--height)));
+    aspect-ratio: var(--width) / var(--height);
+    background: light-dark(var(--surface), var(--surface-dark));
+    overflow: hidden;
+    opacity: 1;
+    transition:
+      transform 0.12s ease,
+      opacity 0.2s ease,
+      box-shadow 0.12s ease;
+  }
+
+  .photo-grid a img {
+    display: block;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.2s ease;
+  }
+
+  .photo-grid a:hover img {
+    transform: scale(1.025);
+  }
+
+  .photo-grid a:focus-visible {
+    outline: 3px solid light-dark(var(--outline), var(--text-dark));
+    outline-offset: 2px;
+    transform: scale(1.03);
+    z-index: 1;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 2px rgb(0 0 0 / 10%);
+  }
+
+  .photo-grid a.hidden {
+    transition: opacity 0.4s ease-in-out;
+    opacity: 0;
+  }
+
+  .photo-grid::after {
+    content: " ";
+    flex-grow: 1000000000;
+  }
+
+  @media (max-width: 700px) {
+    .photo-grid {
+      --padding: 10px;
+      --space: 10px;
+      --min-height: clamp(150px, 42vw, 230px);
+    }
+  }
+</style>
