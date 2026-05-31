@@ -1,0 +1,45 @@
+{
+  "albums": [
+    {
+      "slug": "birds",
+      "title": "Bird Watching",
+      "description": "All sorts of birds seen in the wild",
+      "photos": [
+        { "src": "birds/avocet-1.webp", "alt": "An avocet standing in shallow water" },
+        { "src": "birds/egret-1.webp", "alt": "A white egret reflected in calm water" },
+        { "src": "birds/egret-2.webp", "alt": "An egret walking through rippled water" },
+        { "src": "birds/egret-3.webp", "alt": "An egret framed by soft marsh colors" },
+        { "src": "birds/egret-4.webp", "alt": "A white egret poised near the shoreline" },
+        { "src": "birds/egret-5.webp", "alt": "An egret with its neck curved over water" },
+        { "src": "birds/egret-6.webp", "alt": "An egret standing against a muted background" },
+        { "src": "birds/hummingbird.webp", "alt": "A hummingbird caught mid-flight" },
+        { "src": "birds/hummingbird-2.webp", "alt": "A hummingbird caught mid-flight" }
+      ]
+    },
+    {
+      "slug": "yellowstone",
+      "title": "Yellowstone & The Tetons",
+      "description": "Thermal color, landscapes, and wildlife from Yellowstone and Grand Teton national parks.",
+      "photos": [
+        { "src": "yellowstone/grand-prismatic.webp", "alt": "Grand Prismatic Spring from above" },
+        { "src": "yellowstone/lake-yellowstone.webp", "alt": "Lake Yellowstone beneath a broad sky" },
+        { "src": "yellowstone/yellow-stone-falls.webp", "alt": "Yellowstone Falls cutting through the canyon" },
+        { "src": "yellowstone/jam-the-bear.webp", "alt": "A bear moving through roadside vegetation" },
+        { "src": "yellowstone/tetons-1.webp", "alt": "The Teton range rising over an open landscape" },
+        { "src": "yellowstone/tetons-2.webp", "alt": "Clouds moving across the Teton peaks" },
+        { "src": "yellowstone/tetons-3.webp", "alt": "A wide view of the Tetons in clean afternoon light" },
+        { "src": "yellowstone/tetons-4.webp", "alt": "Teton peaks with layered foreground terrain" },
+        { "src": "yellowstone/tetons-5.webp", "alt": "A rugged section of the Teton mountain range" }
+      ]
+    },
+    {
+      "slug": "places",
+      "title": "Places",
+      "description": "A small set of coastal and city scenes.",
+      "photos": [
+        { "src": "places/pebble-beach.webp", "alt": "Pebble Beach coastline in soft light" },
+        { "src": "places/seattle.webp", "alt": "Seattle skyline and water" }
+      ]
+    }
+  ]
+}
