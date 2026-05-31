@@ -19,6 +19,10 @@ const {
   albumHref,
   class: className = ""
 } = Astro.props;
+
+const imageHeight = preview ? 640 : 400;
+const imageDensities = preview ? [1, 1.5, 2] : undefined;
+const imageQuality = preview ? 90 : undefined;
 ---
 
 <section
@@ -44,7 +48,9 @@ const {
           format="webp"
           src={photo.image}
           alt={photo.alt}
-          height={400}
+          height={imageHeight}
+          densities={imageDensities}
+          quality={imageQuality}
           loading={index < eagerCount ? "eager" : "lazy"}
         />
       </a>
