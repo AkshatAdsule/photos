@@ -20,9 +20,12 @@ const {
   class: className = ""
 } = Astro.props;
 
-const imageHeight = preview ? 640 : 400;
-const imageDensities = preview ? [1, 1.5, 2] : undefined;
-const imageQuality = preview ? 90 : undefined;
+// Width descriptors let small screens avoid downloading desktop-size thumbnails.
+const imageWidths = [320, 480, 640, 960, 1280, 1920];
+const imageSizes = (photo: AlbumPhoto) => {
+  const ratio = photo.image.width / photo.image.height;
+  return `(min-width: 1440px) ${Math.ceil(460 * ratio)}px, (min-width: 701px) ${Math.ceil(320 * ratio)}px, (min-width: 520px) ${Math.ceil(300 * ratio)}px, calc(100vw - 20px)`;
+};
 ---
 
 <section
@@ -38,7 +41,7 @@ const imageQuality = preview ? 90 : undefined;
             ? `${albumHref}?photo=${encodeURIComponent(photo.src)}`
             : photo.image.src
         }
-        target={albumHref ? undefined : "_blank"}
+        data-astro-reload={albumHref ? undefined : true}
         data-astro-prefetch="false"
         data-fancybox={albumHref ? undefined : galleryId}
         data-caption={photo.title ?? photo.alt}
@@ -49,15 +52,43 @@ const imageQuality = preview ? 90 : undefined;
           format="webp"
           src={photo.image}
           alt={photo.alt}
-          height={imageHeight}
-          densities={imageDensities}
-          quality={imageQuality}
+          width={Math.min(960, photo.image.width)}
+          widths={imageWidths.filter((width) => width < Math.min(1920, photo.image.width)).concat(Math.min(1920, photo.image.width))}
+          sizes={`${index < eagerCount ? "" : "auto, "}${imageSizes(photo)}`}
+          quality={82}
+          decoding="async"
+          fetchpriority={index === 0 && eagerCount > 0 ? "high" : "auto"}
           loading={index < eagerCount ? "eager" : "lazy"}
         />
       </a>
     ))
   }
 </section>
+
+<script>
+  let previewObserver: ResizeObserver | undefined;
+
+  const setupPreviews = () => {
+    previewObserver?.disconnect();
+    // Cropped rows must not leave invisible links in the tab order/accessibility tree.
+    const updatePreview = (grid: HTMLElement) => {
+      const bottom = grid.getBoundingClientRect().bottom;
+      grid.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => {
+        link.inert = bottom - link.getBoundingClientRect().top < 44;
+      });
+    };
+    previewObserver = new ResizeObserver((entries) => {
+      entries.forEach(({ target }) => updatePreview(target as HTMLElement));
+    });
+    document.querySelectorAll<HTMLElement>(".photo-grid--preview").forEach((grid) => {
+      updatePreview(grid);
+      previewObserver!.observe(grid);
+    });
+  };
+
+  document.addEventListener("astro:page-load", setupPreviews);
+  document.addEventListener("astro:before-swap", () => previewObserver?.disconnect());
+</script>
 
 <style>
   .photo-grid {
@@ -97,22 +128,18 @@ const imageQuality = preview ? 90 : undefined;
     transition: transform 0.2s ease;
   }
 
-  .photo-grid a:hover img {
-    transform: scale(1.025);
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .photo-grid a:hover img {
+      transform: scale(1.025);
+    }
   }
 
   .photo-grid a:focus-visible {
     outline: 3px solid var(--outline);
-    outline-offset: 2px;
-    transform: scale(1.03);
+    outline-offset: -3px;
     z-index: 1;
     border-radius: 2px;
     box-shadow: 0 2px 4px 2px rgb(0 0 0 / 10%);
-  }
-
-  .photo-grid a.hidden {
-    transition: opacity 0.4s ease-in-out;
-    opacity: 0;
   }
 
   .photo-grid::after {

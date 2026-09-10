@@ -30,8 +30,13 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
   };
 
   const setupFancybox = () => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const options: Partial<FancyboxOptions> = {
+      ...fancyboxOptions,
+      ...(reduceMotion ? { zoomEffect: false, fadeEffect: false, showClass: false, hideClass: false } : {}),
+    };
     Fancybox.unbind("[data-fancybox]");
-    Fancybox.bind("[data-fancybox]", fancyboxOptions);
+    Fancybox.bind("[data-fancybox]", options);
 
     const requestedPhoto = new URLSearchParams(window.location.search).get("photo");
 
@@ -45,7 +50,7 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
       if (requestedIndex >= 0) {
         Fancybox.fromNodes(galleryLinks, {
-          ...fancyboxOptions,
+          ...options,
           startIndex: requestedIndex,
           triggerEl: galleryLinks[requestedIndex],
         });
@@ -61,6 +66,7 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
     }
   };
 
-  setupFancybox();
   document.addEventListener("astro:page-load", setupFancybox);
+  // Remove overlays, scroll locks and delegated listeners before Astro replaces the body.
+  document.addEventListener("astro:before-swap", () => Fancybox.destroy());
 </script>

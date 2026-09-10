@@ -9,7 +9,7 @@ const { album } = Astro.props;
 ---
 
 <header class="album-page-header">
-  <a href="/" class="album-page-header__back-link">All albums</a>
+  <a href="/" class="album-page-header__back-link" data-return-to-albums>All albums</a>
   <h1>{album.title}</h1>
   <p>{album.description}</p>
 </header>
@@ -25,7 +25,7 @@ const { album } = Astro.props;
   .album-page-header__back-link {
     display: inline-flex;
     align-items: center;
-    min-height: 32px;
+    min-height: 44px;
     margin-bottom: 18px;
     border: 2px solid currentColor;
     padding: 0 10px;
