@@ -9,9 +9,10 @@ import { albums } from "../lib/albums";
   description="A collection of photos taken by me"
 >
   <main class="album-index">
+    <h1 class="visually-hidden">Photos by Akshat</h1>
     {
       albums.map((album, index) => (
-        <AlbumPreview album={album} eagerCount={index === 0 ? 6 : 0} />
+        <AlbumPreview album={album} eagerCount={index === 0 ? 2 : 0} />
       ))
     }
   </main>

@@ -1,7 +1,7 @@
 ---
 import "~/styles/reset.css";
 import "~/styles/base.css";
-import { ClientRouter } from "astro:transitions";
+import { ClientRouter, fade } from "astro:transitions";
 import { Font } from "astro:assets";
 
 import smartypants from "smartypants";
@@ -43,13 +43,50 @@ const pageTitle = Astro.url.pathname === "/" ? title : `${title} · ${siteName}`
     {
       image && (
         <>
-          <meta property="og:image" content={image.src} />
+          <meta property="og:image" content={new URL(image.src, Astro.site).href} />
           <meta property="og:image:alt" content={image.alt} />
         </>
       )
     }
   </head>
-  <body>
+  <body transition:animate={fade({ duration: "180ms" })}>
     <slot />
   </body>
 </html>
+
+<script>
+  import type { TransitionBeforePreparationEvent } from "astro:transitions/client";
+
+  type AlbumPosition = { y: number; href?: string };
+  const storageKey = "photos:album-position";
+  let position: AlbumPosition | undefined;
+  let restoreAlbums = false;
+
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(storageKey) ?? "null");
+    if (saved && Number.isFinite(saved.y) && saved.y >= 0) position = saved;
+  } catch { /* Storage can be unavailable in private browsing. */ }
+
+  document.addEventListener("astro:before-preparation", (event) => {
+    const navigation = event as TransitionBeforePreparationEvent;
+    restoreAlbums = navigation.navigationType !== "traverse" &&
+      !!navigation.sourceElement?.closest("[data-return-to-albums]");
+
+    if (navigation.from.pathname === "/") {
+      const link = navigation.sourceElement?.closest<HTMLAnchorElement>("a");
+      position = { y: window.scrollY, href: link?.getAttribute("href") ?? undefined };
+      try { sessionStorage.setItem(storageKey, JSON.stringify(position)); } catch {}
+    }
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+    // Back/Forward stays with Astro's per-history-entry restoration.
+    if (restoreAlbums && location.pathname === "/" && position) {
+      const link = Array.from(document.querySelectorAll<HTMLAnchorElement>("a[href]"))
+        .find((link) => link.getAttribute("href") === position?.href);
+      link?.focus({ preventScroll: true });
+      window.scrollTo({ top: position.y, behavior: "instant" });
+    }
+    restoreAlbums = false;
+  });
+</script>

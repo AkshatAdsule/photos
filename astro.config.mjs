@@ -20,7 +20,7 @@ export default defineConfig({
   },
 
   integrations: [sitemap()],
-  prefetch: false,
+  prefetch: { prefetchAll: false },
 
   vite: {
     ssr: {
